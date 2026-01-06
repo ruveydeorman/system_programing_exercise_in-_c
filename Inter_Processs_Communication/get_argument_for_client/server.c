@@ -27,18 +27,20 @@ int main(){
             continue;
         }
         printf("sunucu : istemci bağlantisi kabul edildi..\n");
-        while(1){
         char buffer[256];
         ssize_t read_byte = read(client_fd,buffer,sizeof(buffer)-1);
         if(read_byte>0){
             buffer[read_byte]='\0';
-            printf("sunucu:istemciden alinan mesaj:%s\n",buffer);
+            printf("sunucu:istemciden alinan mesaj: %s\n",buffer);
+        }
+        else if(read_byte=='\0'){
+           printf("bytes read is 0\n");
         }
         close(client_fd);
-    }
     }
 
     
     close(sock);
     unlink(local.sun_path);
+    return 0;
 }
